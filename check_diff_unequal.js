@@ -40,7 +40,7 @@ function checkContain(new_sentence, old_paragraph) {
     var old_matched_percent = getAverage(matched.num_matches, old_sentence.length);
 
     if (filtered_percent > old_matched_percent) {
-      matched.arr_pos = i;
+      matched.arr_pos = new_arr.indexOf(new_sentence);
       matched.num_matches = filtered.length;
       matched.percent_matches = filtered_percent;
       matched.old_length = old_sentence.length;
@@ -52,11 +52,19 @@ function checkContain(new_sentence, old_paragraph) {
 
 if (new_arr.length !== old_arr.length) {
   var matched_info = [];
+  var matched_percent = [];
+
+  var unmatched_sent = [];
 
   new_arr.forEach(function(new_arr_sent) {
     var total = checkContain(new_arr_sent, old_arr);
-    matched_info.push(total.percent_matches + "%");
+    matched_info.push(total);
+    matched_percent.push(total.percent_matches);
+
+    if (total.percent_matches < 20) {
+      unmatched_sent.push(total.arr_pos);
+    }
   })
 
-  document.getElementById("graf").innerHTML = matched_info.join(" ");
+  document.getElementById("graf").innerHTML = "<strong>Unmatched sentence:</strong> " + new_arr[unmatched_sent] + ".";
 }
