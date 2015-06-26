@@ -2,11 +2,14 @@ var new_new = "Brands on Instagram can't bank on people liking, sharing or comme
 
 var old_old = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people. There's no algorithm to resurface old-yet-popular posts.";
 
-var new_arr = new_new.split(/\./);
-var old_arr = old_old.split(/\./);
+function grafArr(graf) {
+  var graf_arr = graf.split(/\./);
+  graf_arr.pop();
+  return graf_arr;
+}
 
-new_arr.pop();
-old_arr.pop();
+var new_arr = grafArr(new_new);
+var old_arr = grafArr(old_old);
 
 Array.prototype.contains = function(x) {
   for (var i in this) {
@@ -50,21 +53,21 @@ function checkContain(new_sentence, old_paragraph) {
   return matched;
 }
 
-if (new_arr.length !== old_arr.length) {
-  var matched_info = [];
-  var matched_percent = [];
+function findOddSent(new_graf, old_graf) {
+  var unmatched_sent_pos = [];
 
-  var unmatched_sent = [];
+  new_graf.forEach(function(new_arr_sent) {
+    var match_info = checkContain(new_arr_sent, old_graf);
 
-  new_arr.forEach(function(new_arr_sent) {
-    var total = checkContain(new_arr_sent, old_arr);
-    matched_info.push(total);
-    matched_percent.push(total.percent_matches);
-
-    if (total.percent_matches < 20) {
-      unmatched_sent.push(total.arr_pos);
+    if (match_info.percent_matches < 20) {
+      unmatched_sent_pos.push(match_info.arr_pos);
     }
   })
 
-  document.getElementById("graf").innerHTML = "<strong>Unmatched sentence:</strong> " + new_arr[unmatched_sent] + ".";
+  return unmatched_sent_pos;
+}
+
+if (new_arr.length !== old_arr.length) {
+  var odd_sent = findOddSent(new_arr, old_arr);
+  document.getElementById("graf").innerHTML = "<strong>Unmatched sentence:</strong> " + new_arr[odd_sent[0]] + ".";
 }
