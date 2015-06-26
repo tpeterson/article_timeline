@@ -2,35 +2,39 @@ var new_new = "Brands on Instagram can't bank on people liking, sharing or comme
 
 var old_old = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people. There's no algorithm to resurface old-yet-popular posts. Instagram is Twitter without the retweet ripple effect.";
 
-var new_arr = new_new.split(/\./);
-var old_arr = old_old.split(/\./);
+function grafArr(graf) {
+  var graf_arr = graf.split(/\./);
+  graf_arr.pop();
+  return graf_arr;
+}
 
-var paragraph = [];
-var non_word_match = [];
+var new_arr = grafArr(new_new);
+var old_arr = grafArr(old_old);
 
-// NEED TO CHANGE FOR TIMES WHEN PARAGRAPHS HAVE DIFF # SENTENCES
 function splitGraph(new_arr, old_arr) {
-  new_arr.forEach(function(x) {
-    var y = old_arr[new_arr.indexOf(x)];
+  var paragraph = [];
 
-    var old_lines = y.split(/\s/);
-    var new_lines = x.split(/\s/);
+  new_arr.forEach(function(new_sent) {
+    var old_sent = old_arr[new_arr.indexOf(new_sent)];
+
+    var old_sent_arr = old_sent.split(/\s/);
+    var new_sent_arr = new_sent.split(/\s/);
     var sentence = [];
 
-    new_lines.forEach(function(a) {
-      if (a == old_lines[0]) {
-        sentence.push(a);
-        old_lines.splice(0, 1);
+    new_sent_arr.forEach(function(word) {
+      if (word == old_sent_arr[0]) {
+        sentence.push(word);
+        old_sent_arr.splice(0, 1);
       } else {
-        var new_word = "<strong>" + a + "</strong>";
+        var new_word = "<strong>" + word + "</strong>";
         sentence.push(new_word);
       }
     })
     paragraph.push(sentence.join(" ") + ".");
   })
-  paragraph.pop();
+  return paragraph;
 }
 
-splitGraph(new_arr, old_arr);
+var paragraph_arr = splitGraph(new_arr, old_arr);
 
-document.getElementById("graf").innerHTML = paragraph.join(" ");
+document.getElementById("graf").innerHTML = paragraph_arr.join(" ");
