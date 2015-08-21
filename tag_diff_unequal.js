@@ -1,16 +1,19 @@
+// THIS SCRIPT IDENTIFIES WHICH WORDS AND COMPLETE SENTENCES DON'T APPEAR IN BOTH PARAGRAPHS
+
 var new_new = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people, including people who may have missed the original post. There's no algorithm to resurface old-yet-popular posts. Instagram is not Facebook; it's Twitter without the retweet ripple effect.";
 
 var old_old = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people. There's no algorithm to resurface old-yet-popular posts.";
 
 function grafArr(graf) {
-  var graf_arr = graf.split(/\./);
-  graf_arr.pop();
+  var graf_arr = graf.split(/\./); // push sentences into an array
+  graf_arr.pop(); // delete element after final '.'
   return graf_arr;
 }
 
 var new_arr = grafArr(new_new);
 var old_arr = grafArr(old_old);
 
+// check if array contains an element
 Array.prototype.contains = function(x) {
   for (var i in this) {
     if (this[i] == x) {
@@ -24,6 +27,7 @@ function getAverage(part, whole) {
   return (part * 100) / whole;
 }
 
+// compare sentences from old and new grafs to identify sentence that accounts for unequal graf length
 function checkContain(new_sentence, old_paragraph) {
   var matched = {
     arr_pos: 0,
@@ -53,6 +57,7 @@ function checkContain(new_sentence, old_paragraph) {
   return matched;
 }
 
+// identify sentence that makes grafs unequal length
 function findOddSent(new_graf, old_graf) {
   var unmatched_sent_pos = [];
 
@@ -67,6 +72,7 @@ function findOddSent(new_graf, old_graf) {
   return unmatched_sent_pos;
 }
 
+// remove sentence that makes grafs unequal length
 function removeOddSent(new_graf, odd_pos) {
   var half_graf = new_graf.slice(0, odd_pos);
   var other_half = new_graf.slice(odd_pos + 1);
@@ -75,6 +81,7 @@ function removeOddSent(new_graf, odd_pos) {
   return cut_graf;
 }
 
+// find unmatched words in equal-length grafs
 function splitGraph(new_arr, old_arr) {
   var paragraph = [];
 
@@ -100,12 +107,16 @@ function splitGraph(new_arr, old_arr) {
 }
 
 if (new_arr.length !== old_arr.length) {
+  // find superfluous sentence
   var odd_sent = findOddSent(new_arr, old_arr);
   document.getElementById("graf").innerHTML = "<strong>Unmatched sentence:</strong> " + new_arr[odd_sent[0]] + ".";
 
+  // cut superfluous sentence from new graf
   var cut_graf = removeOddSent(new_arr, odd_sent);
+  // find unmatched words in grafs with same number of sentences
   var edited_graf = splitGraph(cut_graf, old_arr);
 
+  // add superfluous sentence back into graf
   var new_sent = "<strong>" + new_arr[odd_sent] + "</strong>";
   edited_graf.splice(odd_sent, 0, new_sent);
 

@@ -1,3 +1,5 @@
+// THIS SCRIPT IDENTIFIES WHICH SENTENCE DOESN'T APPEAR IN BOTH PARAGRAPHS
+
 var new_new = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people, including people who may have missed the original post. There's no algorithm to resurface old-yet-popular posts. Instagram is not Facebook; it's Twitter without the retweet ripple effect.";
 
 var old_old = "Brands on Instagram can't bank on people liking, sharing or commenting on their posts as a way to get those posts in front of more people. There's no algorithm to resurface old-yet-popular posts.";
