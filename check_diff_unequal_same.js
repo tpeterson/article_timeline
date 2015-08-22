@@ -111,33 +111,6 @@ function compareUnequal(new_graf_arr, old_graf_arr) {
 
   var checked_equal_graf = compareEqual(new_equal_graf_arr, old_graf_arr);
 
-  /*(function compareGrafs() {
-    var final_paragraph_arr = [];
-
-    new_equal_graf_arr.forEach(function(new_sentence) {
-      var old_sentence = old_graf_arr[new_equal_graf_arr.indexOf(new_sentence)];
-
-      var old_sentence_arr = old_sentence.split(/\s/);
-      var new_sentence_arr = new_sentence.split(/\s/);
-
-      var final_sentence_arr = [];
-
-      new_sentence_arr.forEach(function(new_sentence_word) {
-        if (new_sentence_word === old_sentence_arr[0]) {
-          final_sentence_arr.push(new_sentence_word);
-          old_sentence_arr.splice(0, 1);
-        } else {
-          var unmatched_word = "<strong>" + new_sentence_word + "</strong>";
-          final_sentence_arr.push(unmatched_word);
-        }
-      });
-
-      final_paragraph_arr.push(final_sentence_arr.join(" ") + ".");
-    });
-
-    return final_paragraph_arr;
-  })();*/
-
   var unmatched_sentence = "<strong>" + new_graf_arr[unmatched_sentence_arr_position] + "</strong>";
   checked_equal_graf.splice(unmatched_sentence_arr_position, 0, unmatched_sentence);
   return checked_equal_graf;
