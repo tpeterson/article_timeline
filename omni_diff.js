@@ -4,7 +4,7 @@ var old_old = "Brands on Instagram can't bank on people liking, sharing or comme
 
 function grafArr(graf) {
   var graf_arr = graf.split(/\./); // push sentences into an array
-  graf_arr.pop(); // delete element after final '.
+  graf_arr.pop(); // delete element after final '.'
   return graf_arr;
 }
 
