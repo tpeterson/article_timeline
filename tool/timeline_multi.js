@@ -29,8 +29,7 @@
       var checked_graf = compareEqual(new_graf_arr, old_graf_arr);
       document.getElementById("graf").innerHTML = checked_graf.join("");
       document.getElementById("old_graf").innerHTML = "<h2>Original Paragraph</h2>" + old_old;
-      document.getElementById("new_graf").innerHTML = "<h2>Updated Paragraph</h2>" +
-      new_new;
+      document.getElementById("new_graf").innerHTML = "<h2>Updated Paragraph</h2>" + new_new;
     } else {
       var checked_graf = compareUnequal(new_graf_arr, old_graf_arr);
       document.getElementById("graf").innerHTML = checked_graf.join("");
