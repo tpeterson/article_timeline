@@ -1,3 +1,4 @@
+// CAN HANDLE MORE SENTENCES IN NEW GRAF THAN OLD GRAF, BUT NOT OTHER WAY AROUND
 (function() {
   document.addEventListener("readystatechange", function(event) {
     document.getElementById("compare_button").addEventListener("click", processGrafs, false);

@@ -1,3 +1,4 @@
+// CAN HANDLE UNEQUAL NUMBER OF SENTENCES IN EITHER GRAF AND SHOW ADDED/DELETED SENTENCES/WORDS
 (function() {
   document.addEventListener("readystatechange", function(event) {
     document.getElementById("compare_button").addEventListener("click", processGrafs, false);

@@ -1,3 +1,4 @@
+// ORIGINAL WORKING PROTOTYPE
 (function(){
   document.addEventListener("readystatechange", function(event){
     document.getElementById("compare_button").addEventListener("click", processGrafs, false);
